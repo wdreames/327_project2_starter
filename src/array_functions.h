@@ -44,7 +44,10 @@ void processLine(std::string &myString);
 void processToken(std::string &token);
 
 /*if you are debugging the file must be in the project parent directory
-  in this case Project2 with the .project and .cProject files*/
+  in this case Project2 with the .project and .cProject files
+  The last parameter in the following declaration has a default argument given (= std::ios_base::in)
+  Default arguments should only be given in the function declaration, not the definition, in other
+  words do not include this default argument in the function definition*/
 bool openFile(std::fstream& myfile, const std::string& myFileName,
 		std::ios_base::openmode mode = std::ios_base::in);
 
