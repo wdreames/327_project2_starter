@@ -35,6 +35,6 @@ namespace constants {
 	const int THREE_POINTS = 3;
 	const int FIVE_POINTS = 5;
 	const int TEN_POINTS = 10;
-	const int FIFTEEN_POINTS = 15;
+	const int THIRTEEN_POINTS = 13;
 }
 #endif /* CONSTANTS_H_ */

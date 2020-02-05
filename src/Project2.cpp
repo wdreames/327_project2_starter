@@ -106,9 +106,13 @@ void test_ProcessToken(){
 	processToken(mystring);
 	EXPECT_EQ(1, getArraySize(),"6");
 
+	//add 1 more so there are 3 z's
+	mystring = "z";
+	processToken(mystring);
+
 	//seen z twice now
 	EXPECT_EQ((string)"z", getArrayWordAt(0),"7");
-	EXPECT_EQ(2, getArrayWord_NumbOccur_At(0),"8");
+	EXPECT_EQ(3, getArrayWord_NumbOccur_At(0),"8");
 
 	//add some different words
 	mystring = "lizard";
@@ -123,14 +127,30 @@ void test_ProcessToken(){
 	EXPECT_EQ(4, getArraySize(),"9");
 
 	sortArray(ASCENDING);
-	EXPECT_EQ("green", getArrayWordAt(0),"10");
-	EXPECT_EQ(2, getArrayWord_NumbOccur_At(0),"11");
-	EXPECT_EQ((string)"is", getArrayWordAt(1),"12");
-	EXPECT_EQ(1, getArrayWord_NumbOccur_At(1),"13");
-	EXPECT_EQ((string)"lizard", getArrayWordAt(2),"14");
-	EXPECT_EQ(1, getArrayWord_NumbOccur_At(2),"15");
-	EXPECT_EQ((string)"z", getArrayWordAt(3),"16");
-	EXPECT_EQ(2, getArrayWord_NumbOccur_At(3),"17");
+	EXPECT_EQ("green", getArrayWordAt(0),"10_A");
+	EXPECT_EQ(2, getArrayWord_NumbOccur_At(0),"11_A");
+	EXPECT_EQ((string)"is", getArrayWordAt(1),"12_A");
+	EXPECT_EQ(1, getArrayWord_NumbOccur_At(1),"13_A");
+	EXPECT_EQ((string)"lizard", getArrayWordAt(2),"14_A");
+	EXPECT_EQ(1, getArrayWord_NumbOccur_At(2),"15_A");
+	EXPECT_EQ((string)"z", getArrayWordAt(3),"16_A");
+	EXPECT_EQ(3, getArrayWord_NumbOccur_At(3),"17_A");
+
+	sortArray(DESCENDING);
+	EXPECT_EQ("z", getArrayWordAt(0),"10_D");
+	EXPECT_EQ(3, getArrayWord_NumbOccur_At(0),"11_D");
+	EXPECT_EQ((string)"lizard", getArrayWordAt(1),"12_D");
+	EXPECT_EQ(1, getArrayWord_NumbOccur_At(1),"13_D");
+	EXPECT_EQ((string)"is", getArrayWordAt(2),"14_D");
+	EXPECT_EQ(1, getArrayWord_NumbOccur_At(2),"15_D");
+	EXPECT_EQ((string)"green", getArrayWordAt(3),"16_D");
+	EXPECT_EQ(2, getArrayWord_NumbOccur_At(3),"17_D");
+
+	sortArray(NUMBER_OCCURRENCES);
+	EXPECT_EQ((string)"z", getArrayWordAt(0),"16_N");
+	EXPECT_EQ(3, getArrayWord_NumbOccur_At(0),"17_N");
+	EXPECT_EQ("green", getArrayWordAt(1),"10_N");
+	EXPECT_EQ(2, getArrayWord_NumbOccur_At(1),"11_N");
 }
 
 //worth 12 points
@@ -196,20 +216,19 @@ void test_system(){
 	EXPECT_EQ(false, test_File(TEST_DATA_EMPTY), "28",FIVE_POINTS);
 
 	//worth 10 (no sorting)
-	EXPECT_EQ(true,test_File(TEST_DATA_FULL),"29",TEN_POINTS);
+	EXPECT_EQ(true,test_File(TEST_DATA_FULL),"29",FIVE_POINTS);
 
 	//worth 10 (correct output)
 	if (does_file_exist(TEST_DATA_FULL_OUT))
-		EXPECT_EQ(true,diff_files(TEST_DATA_FULL_OUT, TEST_DATA_FULL_PROCESSED),"30",TEN_POINTS);
+		EXPECT_EQ(true,diff_files(TEST_DATA_FULL_OUT, TEST_DATA_FULL_PROCESSED),"30",FIVE_POINTS);
 	else
 		cout<<"ERROR 30 "<<TEST_DATA_FULL_OUT<< " does not exist"<<endl;
 		
 	//worth 10 (sorting)
 	EXPECT_EQ(true,test_File(TEST_DATA_FULL, ASCENDING),"31",TEN_POINTS);
-	//worth 15 (correct output)
 	
 	if (does_file_exist(TEST_DATA_FULL_OUT))
-		EXPECT_EQ(true,diff_files(TEST_DATA_FULL_OUT,TEST_DATA_FULL_PROCESSED_SORTED),"32",FIFTEEN_POINTS);
+		EXPECT_EQ(true,diff_files(TEST_DATA_FULL_OUT,TEST_DATA_FULL_PROCESSED_SORTED),"32",THIRTEEN_POINTS);
 	else
 		cout<<"ERROR 32 "<<TEST_DATA_FULL_OUT<< " does not exist"<<endl;
 }

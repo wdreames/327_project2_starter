@@ -1,10 +1,3 @@
-/*
- * functionstocomplete.h
- *
- *  Created on: Sep 10, 2017
- *      Author: keith
- */
-
 #ifndef ARRAY_FUNCTIONS_H_
 #define ARRAY_FUNCTIONS_H_
 #include <iostream>
@@ -44,10 +37,7 @@ void processLine(std::string &myString);
 void processToken(std::string &token);
 
 /*if you are debugging the file must be in the project parent directory
-  in this case Project2 with the .project and .cProject files
-  The last parameter in the following declaration has a default argument given (= std::ios_base::in)
-  Default arguments should only be given in the function declaration, not the definition, in other
-  words do not include this default argument in the function definition*/
+  in this case Project2 with the .project and .cProject files*/
 bool openFile(std::fstream& myfile, const std::string& myFileName,
 		std::ios_base::openmode mode = std::ios_base::in);
 
@@ -63,8 +53,7 @@ int writeArraytoFile(const std::string &outputfilename);
 
 /*
  * Sort myEntryArray based on so enum value.
- * You must provide a solution that handles alphabetic sorting (A-Z)
- * The presence of the enum implies a switch statement based on its value
+ * The presence of the enum implies a switch statement
  */
 void sortArray(constants::sortOrder so);
 
