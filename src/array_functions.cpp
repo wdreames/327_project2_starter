@@ -175,25 +175,29 @@ int writeArraytoFile(const string &outputfilename){
  * The presence of the enum implies a switch statement
  * Uses an insertion sort method for all cases
  */
-//TODO: Make sort work with a < And. Needs to use toUpper()
 void sortArray(constants::sortOrder so){
 	switch(so){
 	case NONE:
 		break; //No sorting required
 	default:  //Default sortArray will use an ascending sort
-	case ASCENDING:
+	case ASCENDING: // Currently just placing lower word in the front
 		for (int i = 1; i < getArraySize(); i++)
 		{
 			word_occurances temp_val = words[i];
+			string temp_word = temp_val.word;
+			toUpper(temp_word);
 			int j = i - 1;
-
-			/* Move elements of arr[0..i-1], that are
-			greater than key, to one position ahead
-			of their current position */
-			while (j >= 0 && words[j].word > temp_val.word)
+			while (j >= 0)
 			{
-				words[j + 1] = words[j];
-				j = j - 1;
+				string current_word = words[j].word;
+				toUpper(current_word);
+				if(current_word > temp_word){
+					words[j + 1] = words[j];
+					j = j - 1;
+				}
+				else{
+					break;
+				}
 			}
 			words[j + 1] = temp_val;
 		}
@@ -202,15 +206,17 @@ void sortArray(constants::sortOrder so){
 		for (int i = 1; i < getArraySize(); i++)
 		{
 			word_occurances temp_val = words[i];
+			string temp_word = temp_val.word;
+			toUpper(temp_word);
 			int j = i - 1;
-
-			/* Move elements of arr[0..i-1], that are
-			greater than key, to one position ahead
-			of their current position */
-			while (j >= 0 && words[j].word < temp_val.word)
+			string current_word = words[j].word;
+			toUpper(current_word);
+			while (j >= 0 && current_word < temp_word)
 			{
 				words[j + 1] = words[j];
 				j = j - 1;
+				string current_word = words[j].word;
+				toUpper(current_word);
 			}
 			words[j + 1] = temp_val;
 		}
@@ -220,10 +226,6 @@ void sortArray(constants::sortOrder so){
 		{
 			word_occurances temp_val = words[i];
 			int j = i - 1;
-
-			/* Move elements of arr[0..i-1], that are
-			greater than key, to one position ahead
-			of their current position */
 			while (j >= 0 && words[j].occurances < temp_val.occurances)
 			{
 				words[j + 1] = words[j];
