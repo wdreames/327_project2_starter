@@ -105,7 +105,7 @@ void processLine(string &myString){
 void processToken(string &token){
 	string clone = token;
 	toUpper(clone);
-	if(strip_unwanted_chars(token)){  //If the method returns false, there won't be anything to add
+	if(strip_unwanted_chars(clone)){  //If the method returns false, there won't be anything to add
 		if(getArraySize()>0){
 			for(int i = 0; i<getArraySize(); i++){
 				string temp_val = getArrayWordAt(i);
@@ -117,6 +117,7 @@ void processToken(string &token){
 			}
 		}
 		//If word does not exist in the array, it is added to it.
+		strip_unwanted_chars(token);
 		words[next_slot].word = token;
 		words[next_slot].occurances = 1;
 		next_slot += 1;
@@ -159,15 +160,12 @@ int writeArraytoFile(const string &outputfilename){
 	}
 	else if(openFile(myfile, outputfilename, ios::out)){
 		for(int i = 0; i<getArraySize(); i++){
-			//cout << "Help?";
-			//cout << getArrayWordAt(i) << " " << getArrayWord_NumbOccur_At(i) << endl;
 			myfile << getArrayWordAt(i) << " " << getArrayWord_NumbOccur_At(i) << endl;
 		}
 		closeFile(myfile);
 		return SUCCESS;
 	}
 	else{
-		//cout << "Help";
 		return FAIL_FILE_DID_NOT_OPEN;
 	}
 }
@@ -177,6 +175,7 @@ int writeArraytoFile(const string &outputfilename){
  * The presence of the enum implies a switch statement
  * Uses an insertion sort method for all cases
  */
+//TODO: Make sort work with a < And. Needs to use toUpper()
 void sortArray(constants::sortOrder so){
 	switch(so){
 	case NONE:

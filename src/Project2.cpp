@@ -226,7 +226,7 @@ void test_system(){
 		
 	//worth 10 (sorting)
 	EXPECT_EQ(true,test_File(TEST_DATA_FULL, ASCENDING),"31",TEN_POINTS);
-	
+
 	if (does_file_exist(TEST_DATA_FULL_OUT))
 		EXPECT_EQ(true,diff_files(TEST_DATA_FULL_OUT,TEST_DATA_FULL_PROCESSED_SORTED),"32",THIRTEEN_POINTS);
 	else
@@ -244,7 +244,7 @@ int main(int argc, char *argv[]) {
 	test_ProcessLine();
 	test_File_OpenClose();
 	test_system();
-	remove_file_debris();
+	//remove_file_debris();
 
 	string studentname = "Your";
 	if (argc == 2) {
